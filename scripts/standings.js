@@ -1,14 +1,24 @@
 // scripts/standings.js
 
-const leagueId = "2631909"; // Your FPL league ID
 const container = document.getElementById("standings-container");
 
+/**
+ * Fetch league data from Vercel serverless function
+ */
 async function fetchLeagueStandings() {
     try {
-        const response = await fetch(`https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/`);
+        // Call your Vercel serverless function
+        const response = await fetch("/api/standings");
         const data = await response.json();
+
+        if (!data.standings || !data.standings.results) {
+            container.innerHTML = `<p style="color:red">No standings data found.</p>`;
+            return;
+        }
+
         const members = data.standings.results;
 
+        // Build the table
         let html = '<table border="1" cellpadding="5" cellspacing="0">';
         html += '<tr><th>Rank</th><th>Team</th><th>Player</th><th>Total Points</th></tr>';
 
@@ -29,7 +39,7 @@ async function fetchLeagueStandings() {
     }
 }
 
-// Only fetch when the tab is active
+// Fetch standings when page loads
 document.addEventListener("DOMContentLoaded", () => {
     fetchLeagueStandings();
 });
