@@ -1,2 +1,78 @@
-<!-- Test preview deployment -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LigiSoo254</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Simple tab styling */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #18b3f0; color: white; padding: 1rem; }
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+        nav li { margin-right: 1rem; }
+        nav a { color: white; text-decoration: none; font-weight: bold; }
+        nav a.active { text-decoration: underline; }
 
+        .tab-content { display: none; padding: 1rem; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LigiSoo254 FPL League</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="tab-link active" data-tab="standings">Standings</a></li>
+                <li><a href="#" class="tab-link" data-tab="rules">Rules</a></li>
+                <li><a href="#" class="tab-link" data-tab="about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="standings" class="tab-content active">
+            <h2>League Standings</h2>
+            <div id="standings-container">
+                <!-- Standings table will go here -->
+            </div>
+        </div>
+
+        <div id="rules" class="tab-content">
+            <h2>Rules of Participation</h2>
+            <p>Rules will be added here.</p>
+        </div>
+
+        <div id="about" class="tab-content">
+            <h2>About the League</h2>
+            <p>Information about LigiSoo254 league goes here.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 LigiSoo254 League</p>
+    </footer>
+
+    <script>
+        // Tab switching
+        const links = document.querySelectorAll('.tab-link');
+        const tabs = document.querySelectorAll('.tab-content');
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.dataset.tab;
+
+                // Switch active link
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Switch active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+<script src="scripts/standings.js"></script>
+
+</body>
+</html>
